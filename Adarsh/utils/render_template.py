@@ -27,9 +27,12 @@ async def render_page(id, secure_hash):
 
             vcl_link = urllib.parse.urljoin(Var.URL, f'{str(id)}/{file_data.file_name}?hash={secure_hash}')
 
+            playit_link = urllib.parse.urljoin(Var.URL, f'{str(id)}/{file_data.file_name}?hash={secure_hash}')
+
             tag = file_data.mime_type.split('/')[0].strip()
 
-            html = (await r.read()).replace('tag', tag) % (heading, file_data.file_name, src, online_link, download_link, vcl_link)
+            html = (await r.read()).replace('tag', tag) % (heading, file_data.file_name, src, online_link, download_link, vcl_link, playit_link)
+
 
     elif str(file_data.mime_type.split('/')[0].strip()) == 'audio':
         async with aiofiles.open('Adarsh/template/req.html') as r:
@@ -42,9 +45,11 @@ async def render_page(id, secure_hash):
 
             vcl_link = urllib.parse.urljoin(Var.URL, f'{str(id)}/{file_data.file_name}?hash={secure_hash}')
 
+            playit_link = urllib.parse.urljoin(Var.URL, f'{str(id)}/{file_data.file_name}?hash={secure_hash}')
+
             tag = file_data.mime_type.split('/')[0].strip()
 
-            html = (await r.read()).replace('tag', tag) % (heading, file_data.file_name, src, online_link, download_link, vcl_link)
+            html = (await r.read()).replace('tag', tag) % (heading, file_data.file_name, src, online_link, download_link, vcl_link, playit_link)
     else:
         async with aiofiles.open('Adarsh/template/dl.html') as r:
             async with aiohttp.ClientSession() as s:
